@@ -1,0 +1,7 @@
+grade = (68, 87, 83, 91, 93, 79, 68, 86, 66, 78)
+print("元组grade中第2个元素的值:", grade[1])
+print("元组grade中第3~7个元素的值:", grade[2:7])
+print("grade中是否有给定成绩87:", 87 in grade)
+print("成绩78学生的学号:", grade.index(78))
+print("成绩68在元组grade中的出现次数:", grade.count(68))
+print("元组grade中的元素个数:", grade.__len__())
