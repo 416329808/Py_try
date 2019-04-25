@@ -7,4 +7,4 @@ def get_sum():
         i += 1
 
 t1=timeit.timeit('get_sum()', 'from __main__ import get_sum',number=1)
-print(t1)
+print('该函数的执行时间', t1)

@@ -1,16 +1,15 @@
-# 导入扩展库
-import re # 正则表达式库
-import collections # 词频统计库
-import numpy as np # numpy数据处理库
-import jieba # 结巴分词
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-from PIL import Image # 图像处理库
-import matplotlib.pyplot as plt # 图像展示库
+
+import re
+import collections
+import numpy as np
+import jieba
+from wordcloud import WordCloud, ImageColorGenerator
+from PIL import Image
+import matplotlib.pyplot as plt
 
 # 读取文件
-fn = open('E:\hh.txt') # 打开文件
-string_data = fn.read() # 读出整个文件
-fn.close() # 关闭文件
+with open('E:\hh.txt', 'r') as f1:
+    string_data = f1.read()
 
 # 文本预处理
 pattern = re.compile(u'\t|\n|\.|-|:|;|\)|\(|\?|"') # 定义正则表达式匹配模式
@@ -29,7 +28,7 @@ for word in seg_list_exact: # 循环读出每个分词
 # 词频统计
 word_counts = collections.Counter(object_list) # 对分词做词频统计
 word_counts_top10 = word_counts.most_common(10) # 获取前10最高频的词
-print (word_counts_top10) # 输出检查
+print(word_counts_top10) # 输出检查
 
 # 词频展示
 mask = np.array(Image.open('E:\miss.jpg')) # 定义词频背景

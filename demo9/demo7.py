@@ -11,4 +11,4 @@ with open('b_file.dat', 'wb+') as f1:
     f1.write(str(basket).encode('utf-8'))
     f1.seek(0, 0)# 移动文件对象至第一个字符
     string = f1.read()
-print(string)
+print('二进制写入后的文件内容为:', string)
