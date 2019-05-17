@@ -19,6 +19,7 @@ def insert(info):
     except:
         # 发生错误时回滚
         db.rollback()
+        print("Error: unable to insert data")
 
     # 关闭数据库连接
     db.close()
@@ -74,6 +75,7 @@ def delete(data):
     except:
         # 发生错误时回滚
         db.rollback()
+        print("Error: unable to delete data")
 
     # 关闭连接
     db.close()
@@ -96,6 +98,7 @@ def update(data):
     except:
         # 发生错误时回滚
         db.rollback()
+        print("Error: unable to update data")
 
     # 关闭数据库连接
     db.close()
@@ -106,14 +109,14 @@ info = [('1', 'mark', 'male', '2000-05-20', 'Chinese', '100000', '10000'),
         ('4', 'jack', 'female', '2000-06-09', 'Chinese', '100002', '10002'),
         ('5', 'ming', 'male', '2000-06-09', 'Chinese', '100000', '10001')]
 
-updata = ( 'hubeiwuhan', '5', )
+updata = ('hubeiwuhan', '5', )
 
 dedata = ('4',)
 
 print('插入数据')
 insert(info)
 selectall()
-print('更新工号为1的intro')
+print('更新工号为5的intro')
 update(updata)
 selectall()
 print('删除工号为4的信息')
