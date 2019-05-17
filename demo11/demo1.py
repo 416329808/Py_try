@@ -3,23 +3,48 @@ import sqlite3
 def create():
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
-    sql = '''create table tb_grade (sno int primary key not null, sname varchar(20), sex varchar(10), brithday data, maths int, english int, os int)'''
-    c.execute(sql)
-    conn.commit()
+    sql = '''create table tb_grade (sno int primary key not null, sname varchar(20), sex varchar(10), brithday date, maths int, english int, os int)'''
+    try:
+        # 执行SQL语句
+        c.execute(sql)
+        # 提交到数据库执行
+        conn.commit()
+    except:
+        # 发生错误时回滚
+        conn.rollback()
+        print("Error: unable to Create table")
     conn.close()
+
 
 def insert(grade):
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
-    c.executemany('insert into tb_grade values (?,?,?,?,?,?,?)', grade)
-    conn.commit()
+    try:
+        # 执行SQL语句
+        c.executemany('insert into tb_grade values (?,?,?,?,?,?,?)', grade)
+        # 提交到数据库执行
+        conn.commit()
+    except:
+        # 发生错误时回滚
+        conn.rollback()
+        print("Error: unable to insert data")
     conn.close()
 
 def selectall():
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
-    c.execute('select * from tb_grade')
-    results = c.fetchall()
+
+    try:
+        # 执行SQL语句
+        c.execute('select * from tb_grade')
+        # 获取所有记录列表
+        conn.commit()
+        results = c.fetchall()
+
+    except:
+        print("Error: unable to fetch data")
+
+
     for row in results:
         sno = row[0]
         sname = row[1]
@@ -29,23 +54,38 @@ def selectall():
         english = row[5]
         os = row[6]
         # 打印结果
-        print("sno =%s,sname=%s,sex=%s,birthday=%s,maths=%s,english=%s, os=%s" % (sno, sname, sex, brithday, maths, english, os))
+        print("sno =%s,sname=%s,sex=%s,birthday=%s,maths=%s,english=%s, os=%s" % (
+            sno, sname, sex, birthday, maths, english, os))
 
-    conn.commit()
+        # 关闭数据库连接
     conn.close()
 
 def update(date):
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
-    c.execute('update tb_grade set maths = ? where sno = ?', date)
-    conn.commit()
+    try:
+        # 执行SQL语句
+        c.execute('update tb_grade set maths = ? where sno = ?', date)
+        # 提交到数据库执行
+        conn.commit()
+    except:
+        # 发生错误时回滚
+        conn.rollback()
+        print("Error: unable to update data")
     conn.close()
 
 def delete(date):
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
-    c.execute('delete from tb_grade where sno = ? ', date)
-    conn.commit()
+    try:
+        # 执行SQL语句
+        c.execute('delete from tb_grade where sno = ? ', date)
+        # 提交修改
+        conn.commit()
+        # 发生错误时回滚
+    except:
+        conn.rollback()
+        print("Error: unable to delete data")
     conn.close()
 
 grade = [(1, 'mark', 'male', '2000-05-20', 99, 80, 85),

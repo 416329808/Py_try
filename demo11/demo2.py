@@ -39,21 +39,22 @@ def selectall():
         cursor.execute(sql)
         # 获取所有记录列表
         results = cursor.fetchall()
-        for row in results:
-            eid = row[0]
-            name = row[1]
-            sex = row[2]
-            birthday = row[3]
-            intro = row[4]
-            profession = row[5]
-            dept = row[6]
-            # 打印结果
-            print("eid=%s,name=%s,sex=%s,brithday=%s,intro=%s,profession=%s, dept=%s" % (
-                eid, name, sex, birthday, intro, profession, dept))
 
     except:
         print("Error: unable to fetch data")
 
+
+    for row in results:
+        eid = row[0]
+        name = row[1]
+        sex = row[2]
+        birthday = row[3]
+        intro = row[4]
+        profession = row[5]
+        dept = row[6]
+            # 打印结果
+        print("eid=%s,name=%s,sex=%s,brithday=%s,intro=%s,profession=%s, dept=%s" % (
+                eid, name, sex, birthday, intro, profession, dept))
     # 关闭数据库连接
     db.close()
 
